@@ -1,55 +1,42 @@
+import 'dart:ffi';
 import 'dart:io';
 
 String input(String message) {
   stdout.write(message);
-  return stdin.readLineSync()!;
+  return stdin.readLineSync() ?? "";
 }
-
-void main() {}
 
 class Product {
-  String name;
-  String description;
-  double price;
+  String _name;
+  String _description;
+  double _price;
+  bool _completed;
 
-  Product(this.name, this.description, this.price);
-}
+  //constructor
+  Product(this._name,this._description,this._price
+          {bool completed = false})
+          : _completed = completed;
 
-class ProductManager {
-  Product add_new_product() {
-    Product p = Product(
-      input("Name: "),
-      input("Description: "),
-      double.parse(input("Price: ")),
-    );
+  
+  // GEtters
 
-    return p;
+  String get name => _name;
+  String get description => _description;
+  double get price => _price;
+  bool get completed => _completed;
+
+  //Setters
+
+  set name(String value){
+    _name = value;
   }
-
-  void view_all_products(List<Product> products) {
-    for (Product p in products) {
-      print("${p.name} | ${p.description} | ${p.price}");
-    }
-  }
-
-  void edit_a_product(List<Product> products, Product p) {
-    for (Product item in products) {
-      if (item.name == p.name) {
-        item.name = input("Name: ");
-        item.description = input("Description: ");
-        item.price = double.parse(input("Price: "));
-
-        print("Product updated successfully!");
-        return;
-      }
-    }
-
-    print("Product not found");
-  }
-
-  void delete_a_product(List<Product> products, Product p) {
-    products.removeWhere((item) => item.name == p.name);
-
-    print("Product deleted successfully!!");
+  set description(String value){
+    _description = value;
+  }  
+  set price(double value){
+    _price = value;
+  }  
+  set completed(bool value){
+    _completed = value;
   }
 }
