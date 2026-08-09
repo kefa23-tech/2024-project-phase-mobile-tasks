@@ -31,7 +31,7 @@ class ItemCard extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,18 +44,16 @@ class ItemCard extends StatelessWidget {
                       Text(
                         title,
                         style: const TextStyle(
-                          fontSize: 18,
+                          fontSize: 10,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
 
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 2),
 
                       Text(
                         description,
-                        style: const TextStyle(
-                          fontSize: 13,
-                        ),
+                        style: const TextStyle(fontSize: 8),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -63,7 +61,7 @@ class ItemCard extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(width: 16),
+                const SizedBox(width: 4),
 
                 // Price and rating
                 Column(
@@ -72,25 +70,19 @@ class ItemCard extends StatelessWidget {
                     Text(
                       '\$${price.toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
 
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 2),
 
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 18,
-                        ),
+                        const Icon(Icons.star, color: Colors.amber, size: 10),
                         Text(
                           rating.toString(),
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
+                          style: const TextStyle(fontSize: 9),
                         ),
                       ],
                     ),

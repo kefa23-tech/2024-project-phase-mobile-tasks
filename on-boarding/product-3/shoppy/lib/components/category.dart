@@ -4,18 +4,16 @@ class CategoryButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
 
-  const CategoryButton(
-    {
-      super.key,
-      required this.title,
-      required this.onPressed;
-      }
-    );
+  const CategoryButton({
+    super.key,
+    required this.title,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 10),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -24,11 +22,11 @@ class CategoryButton extends StatelessWidget {
             vertical: 12,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
-          )
-        ), 
-        child: Text(title)),
-
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(title),
+      ),
     );
   }
 }
