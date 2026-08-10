@@ -10,10 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ItemCard> items = [
+  final List<Widget> items = [
     ItemCard(
       imageUrl:
-          "https://imgs.search.brave.com/tN7_c_1Ao1rkdsKrW9ps-WK_zLf_uRr5Hoqy2qrRwSg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly94Y2Ru/Lm5leHQuY28udWsv/Q29tbW9uL0l0ZW1z/L0RlZmF1bHQvRGVm/YXVsdC9JdGVtSW1h/Z2VzLzNfNFJhdGlv/L1NlYXJjaElOVC9M/Z2UvVzY0MTEzLmpw/Zz9pbT1SZXNpemUs/d2lkdGg9NDUw",
+          "",
       title: "Shirt",
       description: "Cotton shirt",
       price: 25.0,
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
     ItemCard(
       imageUrl:
-          "https://imgs.search.brave.com/_12Rh2oeJthpjOVs3dVweVSf9ieigHl2P4qS3fhCTTU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzA5LzgyLzI2/LzM2MF9GXzIwOTgy/MjY0NF9idFFWM1A2/dFM3WGN5eVNSS2JF/WVlSemJKTVlNZldp/Ni5qcGc",
+          "",
       title: "Shoes",
       description: "Running shoes",
       price: 50.0,
@@ -39,16 +39,15 @@ class _HomePageState extends State<HomePage> {
     ),
 
     ItemCard(
-      imageUrl:
-          "https://imgs.search.brave.com/4D39w_ElGaAvVi0aXVEMCBgS-1Nw27TwoIRqBIg9fmA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjYv/MzQyLzc2MC9zbWFs/bC9hLWZ1bGwtZnJh/bWUtZnJpZW5kbHkt/bGlnaHQtYnJvd24t/dG90ZS1iYWctd291/bGQtdHlwaWNhbGx5/LWJlLWEtc3BhY2lv/dXMtYmFnLXdpdGgt/YS1yZWN0YW5ndWxh/ci1zaGFwZS1hbmQt/c3R1cmR5LWhhbmRs/ZXMtZ2VuZXJhdGl2/ZS1haS1waG90by5q/cGc",
-      title: "Bag",
+      imageUrl:"",
+          title: "Bag",
       description: "Leather bag",
       price: 45.0,
       rating: 4.4,
     ),
   ];
 
-  List<CategoryButton> categories = [
+  final List<Widget> categories = [
     CategoryButton(
       title: "Cloth",
       onPressed: () {
@@ -82,7 +81,8 @@ class _HomePageState extends State<HomePage> {
 
       body: Column(
         children: [
-          // Horizontal categories
+          const SizedBox(height: 20),
+
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(children: categories),
@@ -90,46 +90,20 @@ class _HomePageState extends State<HomePage> {
 
           const SizedBox(height: 20),
 
-          // Product grid
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(10),
-
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 childAspectRatio: 0.7,
               ),
-
               itemCount: items.length,
-
               itemBuilder: (context, index) {
                 return items[index];
               },
             ),
-          ),
-        ],
-      ),
-
-      // Bottom navigation
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.black),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add, color: Colors.black),
-            label: "Add",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings, color: Colors.black),
-            label: "Settings",
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class ItemCard extends StatelessWidget {
@@ -20,6 +21,10 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,6 +33,17 @@ class ItemCard extends StatelessWidget {
             width: double.infinity,
             height: 180,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return const SizedBox(
+                height: 180,
+                child: Center(
+                  child: Icon(
+                    Icons.broken_image,
+                    size: 50,
+                  ),
+                ),
+              );
+            },
           ),
 
           Padding(
@@ -53,7 +69,9 @@ class ItemCard extends StatelessWidget {
 
                       Text(
                         description,
-                        style: const TextStyle(fontSize: 8),
+                        style: const TextStyle(
+                          fontSize: 8,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -79,10 +97,16 @@ class ItemCard extends StatelessWidget {
 
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 10),
+                        const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 10,
+                        ),
                         Text(
                           rating.toString(),
-                          style: const TextStyle(fontSize: 9),
+                          style: const TextStyle(
+                            fontSize: 9,
+                          ),
                         ),
                       ],
                     ),
@@ -96,3 +120,4 @@ class ItemCard extends StatelessWidget {
     );
   }
 }
+

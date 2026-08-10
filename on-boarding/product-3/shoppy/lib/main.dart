@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoppy/pages/home_page.dart';
+import 'package:shoppy/pages/root_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: RootPage());
   }
 }
