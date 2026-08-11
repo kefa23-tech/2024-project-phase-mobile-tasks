@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoppy/pages/edit_page.dart';
-import 'package:shoppy/pages/details_page.dart'; // Import your details page
+import 'package:shoppy/pages/details_page.dart';
 
 class ItemCard extends StatelessWidget {
   final String imageUrl;
@@ -77,7 +77,13 @@ class ItemCard extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EditPage(),
+                            builder: (context) => EditPage(
+                              imageUrl: imageUrl,
+                              title: title,
+                              description: description,
+                              price: price,
+                              category: category,
+                            ),
                           ),
                         );
                       },

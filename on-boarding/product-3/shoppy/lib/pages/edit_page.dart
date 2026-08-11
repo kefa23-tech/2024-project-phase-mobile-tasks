@@ -1,15 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:shoppy/components/category.dart';
 
 class EditPage extends StatefulWidget {
-  const EditPage({super.key});
+  final String imageUrl;
+  final String title;
+  final String description;
+  final double price;
+  final String category;
+
+  const EditPage({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.category,
+  });
 
   @override
   State<EditPage> createState() => _EditPageState();
 }
 
 class _EditPageState extends State<EditPage> {
-  String selectedCategory = 'Cloth';
+  late String selectedCategory;
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
+  late TextEditingController priceController;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCategory = widget.category;
+    titleController = TextEditingController(text: widget.title);
+    descriptionController = TextEditingController(text: widget.description);
+    priceController = TextEditingController(text: widget.price.toString());
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +69,35 @@ class _EditPageState extends State<EditPage> {
                 color: const Color.fromARGB(244, 230, 225, 225),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  Icon(
-                    Icons.image_outlined,
-                    color: Colors.grey,
-                    size: 60,
+                  Image.network(
+                    widget.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Center(
+                        child: Icon(
+                          Icons.broken_image,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(height: 8),
-                  Text("tap to upload"),
+                  Container(
+                    color: Colors.black.withOpacity(0.3),
+                    child: const Center(
+                      child: Text(
+                        "Tap to change image",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -97,6 +148,7 @@ class _EditPageState extends State<EditPage> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: titleController,
               decoration: InputDecoration(
                 hintText: "Enter product name",
                 filled: true,
@@ -114,6 +166,7 @@ class _EditPageState extends State<EditPage> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: descriptionController,
               maxLines: 4,
               decoration: InputDecoration(
                 hintText: "Enter product description",
@@ -132,6 +185,8 @@ class _EditPageState extends State<EditPage> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: priceController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: "Enter product price",
                 filled: true,
@@ -172,7 +227,10 @@ class _EditPageState extends State<EditPage> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Handle save changes logic here
+                      Navigator.pop(context);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
@@ -182,7 +240,7 @@ class _EditPageState extends State<EditPage> {
                       ),
                     ),
                     child: const Text(
-                      "Add Product",
+                      "Save Changes",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -198,8 +256,6 @@ class _EditPageState extends State<EditPage> {
     );
   }
 }
-
-
 
 class CategoryButton extends StatelessWidget {
   final String title;
