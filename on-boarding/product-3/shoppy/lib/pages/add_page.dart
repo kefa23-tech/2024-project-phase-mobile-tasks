@@ -8,6 +8,8 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
+  String selectedCategory = 'Cloth';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +46,46 @@ class _AddPageState extends State<AddPage> {
                   ),
                   const SizedBox(height: 8),
                   const Text("tap to upload"),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              "Category",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CategoryButton(
+                    title: "Cloth",
+                    isSelected: selectedCategory == 'Cloth',
+                    onPressed: () {
+                      setState(() {
+                        selectedCategory = 'Cloth';
+                      });
+                    },
+                  ),
+                  CategoryButton(
+                    title: "Accessories",
+                    isSelected: selectedCategory == 'Accessories',
+                    onPressed: () {
+                      setState(() {
+                        selectedCategory = 'Accessories';
+                      });
+                    },
+                  ),
+                  CategoryButton(
+                    title: "Shoes",
+                    isSelected: selectedCategory == 'Shoes',
+                    onPressed: () {
+                      setState(() {
+                        selectedCategory = 'Shoes';
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
@@ -131,8 +173,8 @@ class _AddPageState extends State<AddPage> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 39, 36, 233),
-                      foregroundColor: const Color.fromARGB(255, 241, 239, 239),
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -151,6 +193,41 @@ class _AddPageState extends State<AddPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CategoryButton extends StatelessWidget {
+  final String title;
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  const CategoryButton({
+    super.key,
+    required this.title,
+    required this.isSelected,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(right: 10),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isSelected
+              ? Colors.blue
+              : const Color.fromARGB(244, 230, 225, 225),
+          foregroundColor: isSelected ? Colors.white : Colors.black,
+          elevation: isSelected ? 2 : 0,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(title),
       ),
     );
   }
